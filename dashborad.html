@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MFU REG</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+
+<body class="flex bg-gray-100 min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="bg-purple-500 text-white w-64 flex flex-col">
+    <div class="flex items-center justify-center h-20 font-bold text-2xl">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Logo_MFU.png" class="h-10 mr-2" alt="MFU Logo"> REG.MFU
+    </div>
+    <nav class="flex flex-col gap-4 p-4">
+      <a href="#" class="bg-purple-600 p-3 rounded-lg">Dashboard</a>
+      <a href="#" class="p-3 hover:bg-purple-400 rounded-lg">Management</a>
+      <a href="#" class="p-3 hover:bg-purple-400 rounded-lg">History</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+      <div class="flex gap-4 items-center">
+        <button class="border px-3 py-1 rounded">EN / TH</button>
+        <input id="dateRange" class="border rounded p-2 w-60" placeholder="Select Date Range" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-6">
+
+      <!-- Graph Section -->
+      <div class="col-span-2 bg-white p-6 rounded-xl shadow">
+        <h2 class="text-xl font-bold mb-4">NUMBER OF WEEKLY USERS</h2>
+        <canvas id="weeklyUsersChart" class="mb-8"></canvas>
+
+        <h2 class="text-xl font-bold mb-4">AVERAGE OVERALL RATING</h2>
+        <canvas id="overallRatingChart"></canvas>
+      </div>
+
+      <!-- Staff Rating Section -->
+      <div class="bg-white p-6 rounded-xl shadow flex flex-col gap-4">
+        <div class="flex items-center gap-4">
+          <img src="https://pin.it/76QKyFhJY" class="rounded-full">
+          <div>
+            <div class="font-bold">Staff A</div>
+            <div>⭐ 4.8</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <img src="https://via.placeholder.com/50" class="rounded-full">
+          <div>
+            <div class="font-bold">Staff B</div>
+            <div>⭐ 4.7</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <img src="https://via.placeholder.com/50" class="rounded-full">
+          <div>
+            <div class="font-bold">Staff C</div>
+            <div>⭐ 4.2</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <img src="https://via.placeholder.com/50" class="rounded-full">
+          <div>
+            <div class="font-bold">Staff D</div>
+            <div>⭐ 3.9</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <img src="https://via.placeholder.com/50" class="rounded-full">
+          <div>
+            <div class="font-bold">Staff E</div>
+            <div>⭐ 4.8</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Script Section -->
+  <script>
+    // Chart.js - Weekly Users
+    const ctx1 = document.getElementById('weeklyUsersChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'bar',
+      data: {
+        labels: ['Mon 24/04/25', 'Tue 22/04/25', 'Wed 23/04/25', 'Thu 24/04/25', 'Fri 25/04/25'],
+        datasets: [
+          {
+            label: 'Appointment',
+            data: [8, 5, 6, 9, 7],
+            backgroundColor: '#2563EB'
+          },
+          {
+            label: 'Document Tracking',
+            data: [4, 3, 6, 5, 2],
+            backgroundColor: '#F59E0B'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Chart.js - Average Overall Rating
+    const ctx2 = document.getElementById('overallRatingChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Appointment', 'Document Tracking'],
+        datasets: [
+          {
+            label: 'Service Provider',
+            data: [3, 5],
+            backgroundColor: '#2563EB'
+          },
+          {
+            label: 'Service Delivery Process',
+            data: [4, 3],
+            backgroundColor: '#F59E0B'
+          },
+          {
+            label: 'Facilities',
+            data: [2, 1],
+            backgroundColor: '#EF4444'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Flatpickr - Date Range
+    flatpickr("#dateRange", {
+      mode: "range",
+      dateFormat: "d M Y"
+    });
+  </script>
+
+</body>
+</html>
